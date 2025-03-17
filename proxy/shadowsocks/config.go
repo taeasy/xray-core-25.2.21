@@ -247,7 +247,7 @@ func (v *ChaCha20) EncodePacket(key []byte, b *buf.Buffer) error {
 
 func (v *ChaCha20) DecodePacket(key []byte, b *buf.Buffer) error {
 	if b.Len() <= v.IVSize() {
-		return newError("insufficient data: ", b.Len())
+		return errors.New("insufficient data: ", b.Len())
 	}
 	iv := b.BytesTo(v.IVSize())
 	stream := crypto.NewChaCha20Stream(key, iv)
